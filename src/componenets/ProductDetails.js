@@ -9,17 +9,20 @@ function handleSoldOut() {
   }
 
 return(
+
+    <div>
  <li className = "product">
     <img src = {product.image_url} alt = {"product name"} />
-    <h4>{product.name} </h4>
-    <p> Price: {product.price}</p>
+    <p>Name: {product.name} </p>
+    <p> Price: ${product.price}</p>
     <p> Description: {product.description}</p>
     {sold ?( 
         <button onClick = {handleSoldOut} className = "primary">In Stock</button>
     ): (
-        <button onClick = {handleSoldOut}> Out of Stock </button>
+        <button onClick = {handleSoldOut}> Sold </button>
     )}
  </li>
+ </div>
 
 )
 }

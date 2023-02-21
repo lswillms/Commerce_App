@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from "react";
 import ProductList from "./ProductList";
 import ProductDetail from "./ProductDetails";
+import NewProductForm from "./NewProductForm";
 
 function ProductPage() {
 
@@ -19,9 +20,14 @@ const addProductsToPage= products.map((product) => (
 />
     ))
 
+function handleAddNewProduct(newProduct) {
+    setProducts([...products, newProduct])
+}
+
 return (
     <main>
         <ProductList addProductsToPage = {addProductsToPage}/>
+        <NewProductForm handleAddNewProduct = {handleAddNewProduct}/>
     </main>
 )
 }
