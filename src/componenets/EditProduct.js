@@ -1,69 +1,78 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 
-function EditProduct({ price, name, description, image_url, handleUpdateProduct,product}) {
+function EditProduct({ productID, editProduct}) {
 
-   const [ priceUpdate, setPriceUpdate] = useState(price)
-    const [ nameUpdate, setNameUpdate] = useState(name)
-   const [ descriptionUpdate, setDescriptionUpdate] = useState(description)
-   const [image_urlUpdate, setImage_urlUpdate] = useState(image_url)
+    const [formData, setFormData] = useState({
+        name:"",
+        price:0,
+        description:"",
+        image_url:""
+    })
 
-    function handleUpdateSubmit(e) {
+    const {name, price, description, image_url} = formData
+
+    useEffect(() => {
+        fetch(`http://localhost:9292/products/${productID}`)
+        .then((resp)=> resp.json())
+        .then((data) => setFormData(data))
+    }, [productID])
+
+    function handleChange(e) {
+        const {name, value} = e.target
+        setFormData({...formData, [name]: value})
+    }
+
+    function handleSubmit(e) {
         e.preventDefault()
-
-        const productUpdateData = {
-           priceUpdate:priceUpdate,
-           nameUpdate:nameUpdate,
-           descriptionUpdate:descriptionUpdate,
-           image_urlUpdate:image_urlUpdate
-        }
-
-        fetch(`http://localhost:9292/products/${product.id}`, {
+        fetch(`http://localhost:9292/products/${productID}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json"
         },
-        body:JSON.stringify({
-            price,name,description,image_url:productUpdateData,
-        })
+        body:JSON.stringify(formData)
     })
     .then((resp) => resp.json())
-    .then((updatedProduct) => handleUpdateProduct(updatedProduct))
- 
+    .then((data) => editProduct(data))
     }
+
 return(
-     <form className = "edit-product" onSubmit = {handleUpdateSubmit}>
+     <form className = "edit-product" onSubmit = {handleSubmit} >
         <h1>Edit Product</h1>
         <input 
          type="integer" 
          name="price" 
+         id= "price"
          placeholder="Product Price" 
-         value = {priceUpdate}
-         onChange = {(e) => setPriceUpdate(e.target.value)}
+         value = {price}
+         onChange = {handleChange}
         />
 
 <input 
          type="text" 
          name="name" 
+         id = "name"
          placeholder="Product Name" 
-         value = {nameUpdate}
-         onChange = {(e) => setNameUpdate(e.target.value)}
+         value = {name}
+         onChange = {handleChange}
         />
 
          <input 
          type="text" 
          name="description" 
+         id = "description"
          placeholder="Product Description" 
-         value = {descriptionUpdate}
-         onChange = {(e) => setDescriptionUpdate(e.target.value)}
+         value = {description}
+         onChange = {handleChange}
         />
     
 
         <input 
          type="text" 
          name="image_url" 
+         id = "image_url"
          placeholder="Product Image" 
-         value = {image_urlUpdate}
-         onChange = {(e) => setImage_urlUpdate(e.target.value)}
+         value = {image_url}
+         onChange = {handleChange}
         />
         
          <input type="submit" value="Save" />

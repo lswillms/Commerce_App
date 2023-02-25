@@ -10,7 +10,7 @@ import EditProduct from "./EditProduct"
 function App() {
  
    const [ products, setProducts] = useState([])
-   const [productID, setProductID] = useState(true)
+   const [productID, setProductID] = useState(false)
   
   
    useEffect(() => {
@@ -40,14 +40,29 @@ function App() {
           setProducts((listAfterDelete))
      }
 
+    function editProduct(updatedProduct){
+      setProducts(prevProducts =>  {
+        const newProductArray = prevProducts.map(product => {
+          if (product.id === updatedProduct.id){
+            return updatedProduct
+          }else {
+            return product
+          }
+        })
+        return newProductArray
+      })
+      setProductID(false)
+    }
+
 
     function renderForm() {
       if(productID) {
-      return <EditProduct 
+         return <EditProduct
       productID = {productID}
+      editProduct = {editProduct}
      />
     }else {
-       return <NewProductForm
+         return <NewProductForm
        updateProduct = { handleAddNewProduct}
        />
     }
@@ -62,7 +77,6 @@ return (
 
 <div>
   <ProductList addProductsToPage = {addProductsToPage}/>
-  <NewProductForm/>
     {renderForm()}
   </div>
 </div>

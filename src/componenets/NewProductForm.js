@@ -3,40 +3,40 @@ import React, {useState} from "react";
 
 function NewProductForm( {handleAddNewProduct}) {
 
-    const [ name, setName] = useState("")
-    const [ price, setPrice] = useState(0)
-    const [ description, setDescription] = useState("")
-    const [image_url, setImage_url] = useState("")
-    
+    const [formData, setFormData] = useState({
+        name:"",
+        price:0,
+        description:"",
+        image_url:""
+    })
     
 
     function handleSubmit(e) {
         e.preventDefault()
 
-    const productData = {
-        name:name,
-        price:price,
-        description:description,
-        image_url:image_url,
-    }
 
     fetch("http://localhost:9292/products", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body:JSON.stringify(productData)
+        body:JSON.stringify(formData)
     })
     .then((resp) => resp.json())
     .then((newProduct) => handleAddNewProduct(newProduct))
-    
+    setFormData({
+        name: "",
+        about: "",
+        phase: "",
+        link: "",
+        image: "",
+      });
+}
 
-    setName("")
-    setPrice(0)
-    setDescription("")
-    setImage_url("")
-    
-    }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((formData) => ({ ...formData, [name]: value }));
+      };
 
 return(
 <div className= "add-new-product">
@@ -48,24 +48,24 @@ return(
          type="text" 
          name="name" 
          placeholder="Product name" 
-         value = {name}
-         onChange = {(e) => setName(e.target.value)}
+         value = {formData.name}
+         onChange = {handleChange}
         />
 
         <input 
          type="integer" 
          name="price" 
          placeholder="Product Price" 
-         value = {price}
-         onChange = {(e) => setPrice(e.target.value)}
+         value = {formData.price}
+         onChange = {handleChange}
         />
 
         <input 
          type="text" 
          name="description" 
          placeholder="Product Description" 
-         value = {description}
-         onChange = {(e) => setDescription(e.target.value)}
+         value = {formData.description}
+         onChange = {handleChange}
         />
     
 
@@ -73,8 +73,8 @@ return(
          type="text" 
          name="image_url" 
          placeholder="Product Image" 
-         value = {image_url}
-         onChange = {(e) => setImage_url(e.target.value)}
+         value = {formData.image_url}
+         onChange = {handleChange}
         />
 
        
