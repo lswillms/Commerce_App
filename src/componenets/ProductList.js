@@ -2,13 +2,14 @@ import React from "react";
 
 
 
+
 function ProductList({addProductsToPage}) {
 
 
 
     return (
         <div>
-                <ul>{addProductsToPage} </ul>
+                <ul>{addProductsToPage}</ul>
         </div>
 
     )
