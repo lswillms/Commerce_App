@@ -7,7 +7,14 @@ function NewProductForm( {handleAddNewProduct}) {
         name:"",
         price:0,
         description:"",
-        image_url:""
+        image_url:"",
+        seller_id:0,
+        seller: {
+            seller_name:"",
+            address:"",
+            email:"",
+            phone_number:""
+        }
     })
     
 
@@ -23,14 +30,20 @@ function NewProductForm( {handleAddNewProduct}) {
         body:JSON.stringify(formData)
     })
     .then((resp) => resp.json())
-    .then((newProduct) => handleAddNewProduct(newProduct))
+    .then((newProduct) => console.log(newProduct))
     setFormData({
-        name: "",
-        about: "",
-        phase: "",
-        link: "",
-        image: "",
-      });
+        name:"",
+        price:0,
+        description:"",
+        image_url:"",
+        seller_id:"",
+        seller: {
+            seller_name:"",
+            address:"",
+            email:"",
+            phone_number:""
+        }
+    })
 }
 
     const handleChange = (e) => {
@@ -40,9 +53,7 @@ function NewProductForm( {handleAddNewProduct}) {
 
 return(
 <div className= "add-new-product">
-
     <h1> New Product Info</h1>
-    
     <form>
         <input 
          type="text" 
@@ -67,7 +78,6 @@ return(
          value = {formData.description}
          onChange = {handleChange}
         />
-    
 
         <input 
          type="text" 
@@ -76,14 +86,51 @@ return(
          value = {formData.image_url}
          onChange = {handleChange}
         />
+        <input 
+         type="integer" 
+         name="seller_id" 
+         id = "seller_id"
+         placeholder="Seller ID" 
+         value = {formData.seller_id}
+         onChange = {handleChange}
+        />
 
-       
+        <input 
+         type="text" 
+         name="seller_name" 
+         id = "seller_name"
+         placeholder="Seller Name" 
+         value = {formData.seller_name}
+         onChange = {handleChange}
+        />
+
+        <input 
+         type="text" 
+         name="address" 
+         id = "address"
+         placeholder="Seller Address" 
+         value = {formData.address}
+         onChange = {handleChange}
+        />
+
+        <input 
+         type="text" 
+         name="email" 
+         id = "email"
+         placeholder="Seller Email" 
+         value = {formData.email}
+         onChange = {handleChange}
+        />
+        <input 
+         type="text" 
+         name="phone_number" 
+         id = "phone_number"
+         placeholder="Seller Phone Number" 
+         value = {formData.phone_number}
+         onChange = {handleChange}
+        />
         <button onClick = {handleSubmit}> Submit </button>
         </form>
-
-    
-    
-
 </div>
 
 )

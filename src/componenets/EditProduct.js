@@ -6,10 +6,15 @@ function EditProduct({ productID, editProduct}) {
         name:"",
         price:0,
         description:"",
-        image_url:""
+        image_url:"",
+        seller_id:0,
+        seller: {
+            seller_name:"",
+            address:"",
+            email:"",
+            phone_number:""
+        }
     })
-
-    const {name, price, description, image_url} = formData
 
     useEffect(() => {
         fetch(`http://localhost:9292/products/${productID}`)
@@ -43,7 +48,7 @@ return(
          name="price" 
          id= "price"
          placeholder="Product Price" 
-         value = {price}
+         value = {formData.price}
          onChange = {handleChange}
         />
 
@@ -52,7 +57,7 @@ return(
          name="name" 
          id = "name"
          placeholder="Product Name" 
-         value = {name}
+         value = {formData.name}
          onChange = {handleChange}
         />
 
@@ -61,7 +66,7 @@ return(
          name="description" 
          id = "description"
          placeholder="Product Description" 
-         value = {description}
+         value = {formData.description}
          onChange = {handleChange}
         />
     
@@ -71,9 +76,52 @@ return(
          name="image_url" 
          id = "image_url"
          placeholder="Product Image" 
-         value = {image_url}
+         value = {formData.image_url}
          onChange = {handleChange}
         />
+        <input 
+         type="text" 
+         name="seller_id" 
+         id = "seller_id"
+         placeholder="Seller ID" 
+         value = {formData.seller_id}
+         onChange = {handleChange}
+        />
+        <input 
+         type="text" 
+         name="image_url" 
+         id = "seller name"
+         placeholder="Seller Name" 
+         value = {formData.seller.seller_name}
+         onChange = {handleChange}
+        />
+
+        <input 
+         type="text" 
+         name="image_url" 
+         id = "seller name"
+         placeholder="Seller Address" 
+         value = {formData.seller.address}
+         onChange = {handleChange}
+        />
+
+        <input 
+         type="text" 
+         name="email" 
+         id = "seller email"
+         placeholder="Seller Email" 
+         value = {formData.seller.email}
+         onChange = {handleChange}
+        />
+        <input 
+         type="text" 
+         name="email" 
+         id = "seller email"
+         placeholder="Seller Phone Number" 
+         value = {formData.seller.phone_number}
+         onChange = {handleChange}
+        />
+        
         
          <input type="submit" value="Save" />
      </form>
