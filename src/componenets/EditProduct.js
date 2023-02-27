@@ -8,12 +8,6 @@ function EditProduct({ productID, editProduct}) {
         description:"",
         image_url:"",
         seller_id:0,
-        seller: {
-            seller_name:"",
-            address:"",
-            email:"",
-            phone_number:""
-        }
     })
 
     useEffect(() => {
@@ -79,49 +73,8 @@ return(
          value = {formData.image_url}
          onChange = {handleChange}
         />
-        <input 
-         type="text" 
-         name="seller_id" 
-         id = "seller_id"
-         placeholder="Seller ID" 
-         value = {formData.seller_id}
-         onChange = {handleChange}
-        />
-        <input 
-         type="text" 
-         name="image_url" 
-         id = "seller name"
-         placeholder="Seller Name" 
-         value = {formData.seller.seller_name}
-         onChange = {handleChange}
-        />
+    
 
-        <input 
-         type="text" 
-         name="image_url" 
-         id = "seller name"
-         placeholder="Seller Address" 
-         value = {formData.seller.address}
-         onChange = {handleChange}
-        />
-
-        <input 
-         type="text" 
-         name="email" 
-         id = "seller email"
-         placeholder="Seller Email" 
-         value = {formData.seller.email}
-         onChange = {handleChange}
-        />
-        <input 
-         type="text" 
-         name="email" 
-         id = "seller email"
-         placeholder="Seller Phone Number" 
-         value = {formData.seller.phone_number}
-         onChange = {handleChange}
-        />
-        
         
          <input type="submit" value="Save" />
      </form>

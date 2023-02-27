@@ -30,6 +30,11 @@ function App() {
   />
       ))
 
+    const seller_info  = products.map((product)=> 
+        <option key = {product.id}>{product.seller_id} :{product.seller.seller_name}
+        </option>
+        )   
+
     
    function handleAddNewProduct(newProduct) {
          setProducts([...products, newProduct])
@@ -60,10 +65,13 @@ function App() {
          return <EditProduct
       productID = {productID}
       editProduct = {editProduct}
+      seller_info = {seller_info}
      />
     }else {
          return <NewProductForm
        updateProduct = { handleAddNewProduct}
+       products = {products}
+       seller_info = {seller_info}
        />
     }
   }

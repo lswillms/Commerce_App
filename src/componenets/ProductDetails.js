@@ -32,8 +32,8 @@ return(
     <Card.Description>
     <p> Price: ${price}</p>
     <p> Description: {description}</p>
-    {/* <p>Seller: {product.seller.seller_name}</p>
-    <p>Email: {product.seller.email}</p>
+    <p>Seller: {product.seller.seller_name}</p>
+    {/* <p>Email: {product.seller.email}</p>
     <p>Address: {product.seller.address}</p>
     <p>Phone Number: {product.seller.phone_number}</p> */}
     </Card.Description>
